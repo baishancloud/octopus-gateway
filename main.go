@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/open-falcon/gateway/g"
-	"github.com/open-falcon/gateway/http"
-	"github.com/open-falcon/gateway/receiver"
-	"github.com/open-falcon/gateway/sender"
+	"github.com/baishancloud/octopux-gateway/g"
+	"github.com/baishancloud/octopux-gateway/http"
+	"github.com/baishancloud/octopux-gateway/receiver"
+	"github.com/baishancloud/octopux-gateway/sender"
 )
 
 func main() {

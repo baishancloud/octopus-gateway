@@ -8,8 +8,8 @@ import (
 	nlist "github.com/toolkits/container/list"
 	nproc "github.com/toolkits/proc"
 
-	"github.com/open-falcon/gateway/g"
-	cpool "github.com/open-falcon/gateway/sender/conn_pool"
+	"github.com/baishancloud/octopux-gateway/g"
+	cpool "github.com/baishancloud/octopux-gateway/sender/conn_pool"
 )
 
 const (

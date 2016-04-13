@@ -6,7 +6,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
-	"github.com/open-falcon/gateway/g"
+	"github.com/baishancloud/octopux-gateway/g"
 )
 
 type Dto struct {

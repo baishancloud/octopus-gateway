@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/open-falcon/gateway/g"
+	"github.com/baishancloud/octopux-gateway/g"
 )
 
 func StartSocket() {

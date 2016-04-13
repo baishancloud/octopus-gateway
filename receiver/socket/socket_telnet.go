@@ -11,8 +11,8 @@ import (
 	pfc "github.com/niean/goperfcounter"
 	cmodel "github.com/open-falcon/common/model"
 
-	"github.com/open-falcon/gateway/g"
-	"github.com/open-falcon/gateway/sender"
+	"github.com/baishancloud/octopux-gateway/g"
+	"github.com/baishancloud/octopux-gateway/sender"
 )
 
 func socketTelnetHandle(conn net.Conn) {

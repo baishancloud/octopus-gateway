@@ -7,8 +7,8 @@ import (
 
 	cutils "github.com/open-falcon/common/utils"
 
-	"github.com/open-falcon/gateway/g"
-	"github.com/open-falcon/gateway/sender"
+	"github.com/baishancloud/octopux-gateway/g"
+	"github.com/baishancloud/octopux-gateway/sender"
 )
 
 func configProcHttpRoutes() {

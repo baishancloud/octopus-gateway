@@ -6,8 +6,8 @@ import (
 
 	cmodel "github.com/open-falcon/common/model"
 
-	"github.com/open-falcon/gateway/g"
-	trpc "github.com/open-falcon/gateway/receiver/rpc"
+	"github.com/baishancloud/octopux-gateway/g"
+	trpc "github.com/baishancloud/octopux-gateway/receiver/rpc"
 )
 
 func configApiHttpRoutes() {

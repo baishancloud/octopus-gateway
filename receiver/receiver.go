@@ -1,8 +1,8 @@
 package receiver
 
 import (
-	"github.com/open-falcon/gateway/receiver/rpc"
-	"github.com/open-falcon/gateway/receiver/socket"
+	"github.com/baishancloud/octopux-gateway/receiver/rpc"
+	"github.com/baishancloud/octopux-gateway/receiver/socket"
 )
 
 func Start() {

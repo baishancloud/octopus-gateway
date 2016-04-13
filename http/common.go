@@ -7,7 +7,7 @@ import (
 
 	"github.com/toolkits/file"
 
-	"github.com/open-falcon/gateway/g"
+	"github.com/baishancloud/octopux-gateway/g"
 )
 
 func configCommonRoutes() {

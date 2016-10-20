@@ -1,10 +1,10 @@
 {
-    "tags": "service=gateway",
-    "bases": ["debug","runtime"],
+    "tags": "cop=bsy,owt=flow,pdl=falcon,module=gateway",
+    "bases": [],
     "push": {
         "enabled": true
     },
     "http": {
-        "enabled": true
+        "enabled": false
     }
 }

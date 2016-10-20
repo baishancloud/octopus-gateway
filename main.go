@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	_ "github.com/baishancloud/goperfcounter"
 	"github.com/open-falcon/gateway/g"
 	"github.com/open-falcon/gateway/http"
 	"github.com/open-falcon/gateway/receiver"

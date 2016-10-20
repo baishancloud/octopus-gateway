@@ -23,7 +23,7 @@ function build() {
         echo "build error"
         exit $sc
     else
-        echo -n "build ok, vsn=" 
+        echo -n "build ok, vsn="
         version
     fi
 }
@@ -63,7 +63,7 @@ function run() {
         cp cfg.example.json $conf
     fi
     ulimit -HSn 65536
-    ./$app -c $conf &> $logfile
+    ./$app -c $conf >>$logfile 2>&1
 }
 
 ## opt

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	pfc "github.com/niean/goperfcounter"
+	pfc "github.com/baishancloud/goperfcounter"
 	cmodel "github.com/open-falcon/common/model"
 	cutils "github.com/open-falcon/common/utils"
 
@@ -117,11 +117,6 @@ func RecvMetricValues(args []*cmodel.MetricValue, reply *g.TransferResp, from st
 	// statistics
 	cnt := int64(len(items))
 	pfc.Meter("Recv", cnt)
-	if from == "rpc" {
-		pfc.Meter("RpcRecv", cnt)
-	} else if from == "http" {
-		pfc.Meter("HttpRecv", cnt)
-	}
 
 	cfg := g.Config()
 	if cfg.Transfer.Enabled {

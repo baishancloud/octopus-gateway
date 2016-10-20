@@ -42,7 +42,7 @@ func Push2SendQueue(items []*cmodel.MetaData) {
 
 		// statistics
 		if !isOk {
-			pfc.Meter("SendDrop", 1)
+			pfc.Meter("SWGWSendDrop", 1)
 		}
 	}
 }

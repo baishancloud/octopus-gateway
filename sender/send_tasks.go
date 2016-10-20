@@ -75,10 +75,10 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 					if err == nil {
 						sendOk = true
 						// statistics
-						pfc.Meter("SendCnt"+host, int64(count))
+						pfc.Meter("SWGWSendCnt"+host, int64(count))
 					} else {
 						// statistics
-						pfc.Meter("SendFailCnt"+host, int64(count))
+						pfc.Meter("SWGWSendFailCnt"+host, int64(count))
 					}
 				}
 			}
@@ -88,11 +88,11 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 				if cfg.Debug {
 					log.Printf("send to transfer fail, connpool:%v", SenderConnPools.Proc())
 				}
-				pfc.Meter("SendFail", int64(count))
+				pfc.Meter("SWGWSendFail", int64(count))
 			} else {
-				pfc.Meter("Send", int64(count))
+				pfc.Meter("SWGWSend", int64(count))
 			}
-			pfc.Histogram("SendTime", int64(time.Since(start)/time.Millisecond))
+			pfc.Histogram("SWGWSendTime", int64(time.Since(start)/time.Millisecond))
 		}(transItems, count)
 	}
 }

@@ -3,10 +3,9 @@ package sender
 import (
 	"log"
 
-	pfc "github.com/niean/goperfcounter"
+	pfc "github.com/baishancloud/goperfcounter"
 	cmodel "github.com/open-falcon/common/model"
 	nlist "github.com/toolkits/container/list"
-	nproc "github.com/toolkits/proc"
 
 	"github.com/baishancloud/octopux-gateway/g"
 	cpool "github.com/baishancloud/octopux-gateway/sender/conn_pool"
@@ -20,10 +19,8 @@ var (
 	SenderQueue     = nlist.NewSafeListLimited(DefaultSendQueueMaxSize)
 	SenderConnPools *cpool.SafeRpcConnPools
 
-	TransferMap         = make(map[string]string, 0)
-	TransferHostnames   = make([]string, 0)
-	TransferSendCnt     = make(map[string]*nproc.SCounterQps, 0)
-	TransferSendFailCnt = make(map[string]*nproc.SCounterQps, 0)
+	TransferMap       = make(map[string]string, 0)
+	TransferHostnames = make([]string, 0)
 )
 
 func Start() {
@@ -45,7 +42,7 @@ func Push2SendQueue(items []*cmodel.MetaData) {
 
 		// statistics
 		if !isOk {
-			pfc.Meter("SendDrop", 1)
+			pfc.Meter("SWGWSendDrop", 1)
 		}
 	}
 }
@@ -59,12 +56,6 @@ func initConnPools() {
 		TransferHostnames = append(TransferHostnames, hn)
 		addrs = append(addrs, addr)
 		TransferMap[hn] = addr
-	}
-
-	// init transfer send cnt
-	for hn, addr := range cfg.Transfer.Cluster {
-		TransferSendCnt[hn] = nproc.NewSCounterQps(hn + ":" + addr)
-		TransferSendFailCnt[hn] = nproc.NewSCounterQps(hn + ":" + addr)
 	}
 
 	// init conn pools

@@ -16,9 +16,10 @@ import (
 // 0.0.9: add proc for send failure, rm git version
 // 0.0.10: control sending concurrent of slow transfers
 // 0.0.11: use pfc
+// 0.0.12: use baishancloud pfc
 
 const (
-	VERSION      = "0.0.11"
+	VERSION      = "0.0.12"
 	GAUGE        = "GAUGE"
 	COUNTER      = "COUNTER"
 	DERIVE       = "DERIVE"

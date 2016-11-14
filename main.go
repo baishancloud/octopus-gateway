@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	_ "github.com/baishancloud/goperfcounter"
 	"github.com/baishancloud/octopux-gateway/g"
 	"github.com/baishancloud/octopux-gateway/http"
 	"github.com/baishancloud/octopux-gateway/receiver"

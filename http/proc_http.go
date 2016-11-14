@@ -12,37 +12,9 @@ import (
 )
 
 func configProcHttpRoutes() {
-	// TO BE DISCARDed
-	http.HandleFunc("/counter/all", func(w http.ResponseWriter, r *http.Request) {
-		RenderDataJson(w, make([]interface{}, 0))
-	})
-	http.HandleFunc("/statistics/all", func(w http.ResponseWriter, r *http.Request) {
-		RenderDataJson(w, make([]interface{}, 0))
-	})
-
-	// proc
-	http.HandleFunc("/proc/counters", func(w http.ResponseWriter, r *http.Request) {
-		RenderDataJson(w, make([]interface{}, 0))
-	})
 
 	http.HandleFunc("/proc/transfer/pools", func(w http.ResponseWriter, r *http.Request) {
 		RenderDataJson(w, sender.SenderConnPools.Proc())
-	})
-
-	http.HandleFunc("/proc/transfer/send", func(w http.ResponseWriter, r *http.Request) {
-		ret := make([]interface{}, 0)
-		for _, p := range sender.TransferSendCnt {
-			ret = append(ret, p.Get())
-		}
-		RenderDataJson(w, ret)
-	})
-
-	http.HandleFunc("/proc/transfer/sendfail", func(w http.ResponseWriter, r *http.Request) {
-		ret := make([]interface{}, 0)
-		for _, p := range sender.TransferSendFailCnt {
-			ret = append(ret, p.Get())
-		}
-		RenderDataJson(w, ret)
 	})
 
 	// trace

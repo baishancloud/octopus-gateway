@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	pfc "github.com/niean/goperfcounter"
+	pfc "github.com/baishancloud/goperfcounter"
 	cmodel "github.com/open-falcon/common/model"
 	cutils "github.com/open-falcon/common/utils"
 	nsema "github.com/toolkits/concurrent/semaphore"
@@ -49,6 +49,7 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 		go func(transItems []*cmodel.MetricValue, count int) {
 			defer sema.Release()
 			var err error
+			start := time.Now()
 
 			// 随机遍历transfer列表，直到数据发送成功 或者 遍历完;随机遍历，可以缓解慢transfer
 			resp := &g.TransferResp{}
@@ -74,10 +75,10 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 					if err == nil {
 						sendOk = true
 						// statistics
-						TransferSendCnt[host].IncrBy(int64(count))
+						pfc.Meter("SWGWSendCnt"+host, int64(count))
 					} else {
 						// statistics
-						TransferSendFailCnt[host].IncrBy(int64(count))
+						pfc.Meter("SWGWSendFailCnt"+host, int64(count))
 					}
 				}
 			}
@@ -87,10 +88,11 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 				if cfg.Debug {
 					log.Printf("send to transfer fail, connpool:%v", SenderConnPools.Proc())
 				}
-				pfc.Meter("SendFail", int64(count))
+				pfc.Meter("SWGWSendFail", int64(count))
 			} else {
-				pfc.Meter("Send", int64(count))
+				pfc.Meter("SWGWSend", int64(count))
 			}
+			pfc.Histogram("SWGWSendTime", int64(time.Since(start)/time.Millisecond))
 		}(transItems, count)
 	}
 }

@@ -17,9 +17,10 @@ import (
 // 0.0.10: control sending concurrent of slow transfers
 // 0.0.11: use pfc
 // 0.0.12: use baishancloud pfc
+// 0.0.13: 添加优雅重启支持
 
 const (
-	VERSION      = "0.0.12"
+	VERSION      = "0.0.13"
 	GAUGE        = "GAUGE"
 	COUNTER      = "COUNTER"
 	DERIVE       = "DERIVE"

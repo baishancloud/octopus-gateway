@@ -14,13 +14,13 @@ import (
 	"github.com/baishancloud/octopux-gateway/g"
 )
 
-func startSendTasks() {
+func startSendTasks(server *g.ReceiverStatusManager) {
 	cfg := g.Config()
 	concurrent := cfg.Transfer.MaxConns * int32(len(cfg.Transfer.Cluster))
-	go forward2TransferTask(SenderQueue, concurrent)
+	go forward2TransferTask(SenderQueue, concurrent, server)
 }
 
-func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
+func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32, server *g.ReceiverStatusManager) {
 	cfg := g.Config()
 	batch := int(cfg.Transfer.Batch)
 	maxConns := int64(cfg.Transfer.MaxConns)
@@ -31,12 +31,17 @@ func forward2TransferTask(Q *nlist.SafeListLimited, concurrent int32) {
 
 	sema := nsema.NewSemaphore(int(concurrent))
 	transNum := len(TransferHostnames)
+	server.Add(1)
+	defer server.Done()
 
 	for {
 		items := Q.PopBackBy(batch)
 		count := len(items)
 		if count == 0 {
 			time.Sleep(time.Millisecond * 50)
+			if server.IsRun() == false && Q.Len() == 0 {
+				return
+			}
 			continue
 		}
 

@@ -23,10 +23,10 @@ var (
 	TransferHostnames = make([]string, 0)
 )
 
-func Start() {
+func Start(server *g.ReceiverStatusManager) {
 	initConnPools()
-	startSendTasks()
-	startSenderCron()
+	startSendTasks(server)
+	startSenderCron(server)
 	log.Println("send.Start, ok")
 }
 

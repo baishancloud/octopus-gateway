@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"log"
+	"net"
 	"net/http"
 	_ "net/http/pprof"
 
@@ -12,6 +13,18 @@ import (
 type Dto struct {
 	Msg  string      `json:"msg"`
 	Data interface{} `json:"data"`
+}
+
+var (
+	httpserv *http.Server
+	ln       *net.TCPListener
+)
+
+func Stop() {
+	if ln != nil {
+		log.Println("set http listen close!")
+		ln.Close()
+	}
 }
 
 func Start() {
@@ -32,13 +45,22 @@ func startHttpServer() {
 	configProcHttpRoutes()
 	configApiHttpRoutes()
 
-	s := &http.Server{
+	httpserv = &http.Server{
 		Addr:           addr,
 		MaxHeaderBytes: 1 << 30,
 	}
 
 	log.Println("http.startHttpServer ok, listening", addr)
-	log.Fatalln(s.ListenAndServe())
+	if addr == "" {
+		addr = ":http"
+	}
+	hln, err := net.Listen("tcp", addr)
+	if err != nil {
+		log.Fatalln("Start listen http error :", err)
+		return
+	}
+	ln = hln.(*net.TCPListener)
+	log.Println(httpserv.Serve(ln))
 }
 
 func RenderJson(w http.ResponseWriter, v interface{}) {

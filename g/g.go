@@ -18,9 +18,10 @@ import (
 // 0.0.11: use pfc
 // 0.0.12: use baishancloud pfc
 // 0.0.13: 添加优雅重启支持
+// 1.0.0: 修改打包方式
 
 const (
-	VERSION      = "0.0.13"
+	VERSION      = "1.0.0"
 	GAUGE        = "GAUGE"
 	COUNTER      = "COUNTER"
 	DERIVE       = "DERIVE"
